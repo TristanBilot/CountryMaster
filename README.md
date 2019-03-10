@@ -1,5 +1,7 @@
 # CountryMaster
 
+CountryMaster is a Web game written in jQuery and using location APIs and databases such as GeoJson or OpenData with Ajax requests.
+
 <h2>Running the game</h2>
 <p>First, you'll need to launch the index.php file on a Server such as MAMP for MacOS or WAMP for Windows.</p>
 <p>The next step is to access to "/V/map.html" to play the game, this allows you to not login and import a database.</p>
