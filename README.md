@@ -6,4 +6,9 @@
 
 <h2>The Game</h2>
 <p>The aim of the game is to find a country of the map from the flag in a while.</p>
+<p><img src ="ReadMeContent/counter.png" alt = "" width = 30% /></p>
 <p><img src ="ReadMeContent/jeu.png" alt = "" width = 50% /></p>
+
+<h2>Search an adress</h2>
+<p>It's also possible to search an adress in France with a searchbar using jQuery and an adress Database API.</p>
+<p><img src ="ReadMeContent/recherche.png" alt = "" width = 50% /></p>
