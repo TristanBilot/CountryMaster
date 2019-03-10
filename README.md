@@ -12,3 +12,15 @@
 <h2>Search an adress</h2>
 <p>It's also possible to search an adress in France with a searchbar using jQuery and an adress Database API.</p>
 <p><img src ="ReadMeContent/recherche.png" alt = "" width = 50% /></p>
+
+<h2>Location service</h2>
+<p><img src ="ReadMeContent/locate.png" alt = "" width = 50% /></p>
+
+<h2>Paris Area metros</h2>
+<p><img src ="ReadMeContent/metro.png" alt = "" width = 50% /></p>
+
+<h2>Add some markers</h2>
+<p><img src ="ReadMeContent/marker2.png" alt = "" width = 50% /></p>
+
+<h2>Need some help ?</h2>
+<p><img src ="ReadMeContent/guide.png" alt = "" width = 35% /></p>
