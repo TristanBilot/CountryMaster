@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Carte géographique</title>
+
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+  integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+  crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+  integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+  crossorigin=""></script>
+  <link rel = "stylesheet" href="https://bootswatch.com/4/journal/bootstrap.min.css"/>
+  <link rel = "stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+  <script type="text/javascript" src="../Assets/js/countdown.js"></script>
+  <script type="text/javascript" src="../Assets/js/mapOperations.js"></script>
+  <script type="text/javascript" src="../Assets/js/countryMaster.js"></script>
+
+  <script src="../Assets/js/recherche.js"></script>
+  <link rel="stylesheet" href="../Assets/css/recherche.css">
+  <link rel="stylesheet" href="../Assets/css/carte.css">
+
+
+</head>
+<body>
+
+  <h1 class="title">Country Master</h1>
+
+
+  <div style="text-align: center;margin-top:20px">
+
+    <img style="width:90px;opacity:0;margin-top:20px;" class="randomCountryImg" src = "" alt = "photo pays" />
+    <h2 style="font-size:1px" class="randomCountry"></h2>
+  </div>
+  <h1 style="text-align:center;margin:30px" class="countdown" id="countdown"></h1>
+  <h1 style="text-align:center;margin:30px" class="message"></h1>
+<script>
+
+</script>
+<span id="running" style="opacity:0">0</span> <!-- 0 si le jeu est lancé, 1 sinon -->
+  <div class="container">
+    <button type="button" class="btn btn-info btn-lg manuelBtn" data-toggle="modal" data-target="#myModal">Manuel d'utilisation</button>
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Comment utiliser le jeu ?</h4>
+          </div>
+          <div class="modal-body">
+            <ul>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <p class="text">Le jeu Country Master est un jeu qui consiste à trouver un pays généré aléatoirement sur la carte du monde. Attention, vous n'avez qu'un essai ! <br />Il existe plusieurs niveaux de difficulté: moyen ou difficile. Cliquez sur jouer et trouvez le pays du premier coup!</p>
+                <span class="badge badge-primary badge-pill">1</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <p class="text">Vous pouvez également placer des points directement en cliquant sur la carte, vous aurez ensuite les informations concernant la position et le nom du pays sélectionné.</p>
+                <span class="badge badge-primary badge-pill">2</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <p class="text ">Rechercher une position directement avec les coordonnées géographiques.</p>
+                  <span class="badge badge-primary badge-pill">3</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <p class="text ">Vous pouvez glisser (drag) plusieurs pays sur la carte pour y accéder.</p>
+                <span class="badge badge-primary badge-pill">4</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                <p class="text">Vous pouvez rechercher directement une adresse depuis la barre de recherche.</p>
+                <span class="badge badge-primary badge-pill">5</span>
+              </li>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="mapid"></div> <!-- MAP -->
+
+  <div class="container">
+
+  <div class='valueContent'>
+    <div id="countryValue" class="valueElement"></div>
+    <div id="latValue" class="valueElement"></div>
+    <div id="lonValue" class="valueElement"></div>
+    <button id="closeValues" type="button" class="close valueElement" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <!-- Tableau de bord -->
+	<nav class="accordion arrows" style="margin-bottom:50px">
+		<header class="box">
+			<label for="acc-close" class="box-title">Tableau de bord</label>
+		</header>
+
+    <input type="radio" name="accordion" id="cb0" />
+    <section class="box">
+      <label class="box-title" for="cb0">CountryMaster</label>
+      <label class="box-close" for="acc-close"></label>
+      <div class="card-body">
+        <p>
+          Le jeu du CountryMaster consiste à chercher un pays sur la carte en un temps limité.<br />
+          Le pays est généré aléatoirement par le jeu et vous avez 20 secondes pour le trouver en cliquant sur la carte.
+        </p>
+
+        <button onclick = "countryPress()"  id = "playBtn" type="button" class="btn btn-success" data-toggle="modal" data-target=".bd-example-modal-sm">Jouer !</button>
+
+        <div id = "countryModal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" >Vous devez chercher le pays</h4>
+              </div>
+              <center>
+                <div class="modal-body" style="padding: 20px;">
+                  <h2 style="margin-bottom:20px;" class="randomCountry"></h2>
+                  <img style="width:80%;" class="randomCountryImg" src = "" alt = "photo pays" />
+                  <button style="margin-top:30px;" data-dismiss="modal" type="button" class="btn btn-success">Go !</button>
+                  <h1 style="text-align:center; margin-top:20px" class="countdown" id="countdown2"></h1>
+                </div>
+              </center>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+		<input type="radio" name="accordion" id="cb1" />
+		<section class="box">
+			<label class="box-title" for="cb1">Placer un marker</label>
+			<label class="box-close" for="acc-close"></label>
+      <div class="card-body">
+        Coordonnées X <input id="inputX" type="text" placeholder=" ex: 53.76"/>
+        Coordonnées Y <input id="inputY" type="text" placeholder=" ex: -7.346" />
+        <button id = "addMarker">Ajouter un marker</button>
+      </div>
+		</section>
+
+		<input type="radio" name="accordion" id="cb3" />
+		<section class="box">
+			<label class="box-title" for="cb3">Rechercher un pays</label>
+			<label class="box-close" for="acc-close"></label>
+			<div class="box-content">
+        <div class="card">
+
+
+            <div class="card-body" >
+              <div>
+                <div id="France" class="ui-widget-content">
+                  <img src="../Assets/img/pays/france.png" alt = "France" class="pays" />
+                </div>
+                <div id="Canada" class="ui-widget-content">
+                  <img src="../Assets/img/pays/canada.png" alt = "Canada" class="pays" />
+                </div>
+                <div id="Italie" class="ui-widget-content">
+                  <img src="../Assets/img/pays/italy.png" alt = "Italie" class="pays" />
+                </div>
+                <div id="Belgique" class="ui-widget-content">
+                  <img src="../Assets/img/pays/belgium.png" alt = "Belgique" class="pays" />
+                </div>
+                <div id="Japan" class="ui-widget-content">
+                  <img src="../Assets/img/pays/japan.png" alt = "Japan" class="pays" />
+                </div>
+                <div id="United-Kingdom" class="ui-widget-content">
+                  <img src="../Assets/img/pays/england.png" alt = "Angleterre" class="pays" />
+                </div>
+                <div id="United-States" class="ui-widget-content">
+                  <img src="../Assets/img/pays/us.png" alt = "Etats-Unis" class="pays" />
+                </div>
+
+                <div id="Colombia" class="ui-widget-content">
+                  <img src="../Assets/img/pays/colombia.png" alt = "Japan" class="pays" />
+                </div>
+                <div id="Peru" class="ui-widget-content">
+                  <img src="../Assets/img/pays/peru.png" alt = "Angleterre" class="pays" />
+                </div>
+                <div id="Sri-Lanka" class="ui-widget-content">
+                  <img src="../Assets/img/pays/sri-lanka.png" alt = "Etats-Unis" class="pays" />
+                </div>
+                <!-- <div id="info" class="ui-widget-content">
+                  <p>Location (Gps)</p>
+                </div> -->
+              </div>
+            </div>
+        </div>
+      </div>
+		</section>
+
+    <input type="radio" name="accordion" id="cb4" />
+		<section class="box">
+			<label class="box-title" for="cb4">Me localiser</label>
+			<label class="box-close" for="acc-close"></label>
+			<div class="box-content">
+            <p>
+              Vous devrez autoriser votre navigateur à récupérer votre localisation pour utiliser cette option.<br />
+              La localisation vous permet d'obtenir votre adresse IP publique.
+            </p>
+            <button id="localisationBtn">Me localiser</button><br />
+
+            <div class='specificContent' style="margin-top:20px;">
+              <div id="ipAdress" class="specificElement"></div>
+              <div id="city" class="specificElement"></div>
+            </div>
+      </div>
+		</section>
+
+    <input type="radio" name="accordion" id="cb5" />
+		<section class="box">
+			<label class="box-title" for="cb5">Liste des metros parisiens</label>
+			<label class="box-close" for="acc-close"></label>
+			<div class="box-content">
+        <button id="metrosBtn" style="margin:20px">Voir tous les metros aux alentours de Paris</button>
+        <div id="nbStations" class="specificElement"></div>
+      </div>
+		</section>
+
+		<input type="radio" name="accordion" id="acc-close" />
+	</nav>
+</div>
+
+
+</head>
+
+
+
+  </body>
+  </html>

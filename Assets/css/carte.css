@@ -1,0 +1,164 @@
+.ui-widget-content { z-index: 1000000; width: 130px; float: left;padding:10px; margin: 30px; background: rgba(100,100,100,0.1);border:none;}
+#droppable { width: 100; height: 150px; float: left; margin: 10px; }
+
+#mapid { height: 500px;width:100%; }
+
+.leaflet-control-geocoder-ban-form input {
+  line-height: 50px !important;
+}
+
+.leaflet-control-geocoder-ban-selected {
+    background-color: rgba(128, 204, 40, 0.3) !important;
+}
+
+.searchBar {
+  border: 2px solid rgba(128, 204, 40, 0.5) !important;
+  min-height: 50px !important;
+  min-width: 50% !important;
+  font-size: 1.3em;
+}
+
+.title {
+  text-align:center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.manuelBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.pays {
+  width: 100%;
+}
+
+#inputX, #inputY {
+  margin-left: 20px;
+}
+
+#addMarker {
+  margin-left: 20px;
+}
+
+.valueElement{
+  display: none;
+  width: auto;
+  padding: 10px 10px 10px 20px;
+}
+#closeValues {
+  position: absolute;
+  right: 20px;
+  top: 10px;
+}
+.valueContent {
+  background: rgba(100,100,100,0.05);
+  position: relative;
+  width: 50%;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+.badge-primary {
+  position: absolute;
+  left: -35px;
+}
+.btn-link {
+  color: #369 !important;
+}
+
+.red {
+  color: #EB6864 !important;
+}
+
+.accordion {
+	margin: auto;
+}
+.accordion input[type='radio'] {
+	display: none;
+}
+.box {
+	position: relative;
+	background: white;
+    height: 64px;
+    transition: all .15s ease-in-out;
+}
+.box::before {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    box-shadow: 0 -1px 0 #e5e5e5,0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
+}
+header.box {
+	background: #369;
+	z-index: 100;
+	cursor: initial;
+	box-shadow: 0 -1px 0 #e5e5e5,0 0 2px -2px rgba(0,0,0,.12),0 2px 4px -4px rgba(0,0,0,.24);
+}
+header .box-title {
+	margin: 0;
+	font-weight: normal;
+	font-size: 16pt;
+	color: white;
+	cursor: initial;
+}
+.box-title {
+	width: calc(100% - 40px);
+	height: 64px;
+	line-height: 64px;
+	padding: 0 20px;
+	display: inline-block;
+	cursor: pointer;
+	-webkit-touch-callout: none;-webkit-user-select: none;-khtml-user-select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;
+}
+.box-content {
+	width: calc(100% - 40px);
+	padding: 30px 20px;
+	font-size: 11pt;
+	color: rgba(0,0,0,.54);
+	display: none;
+}
+.box-close {
+	position: absolute;
+	height: 64px;
+	width: 100%;
+	top: 0;
+	left: 0;
+	cursor: pointer;
+	display: none;
+}
+input:checked + .box {
+	height: auto;
+	margin: 16px 0;
+    box-shadow: 0 0 6px rgba(0,0,0,.16),0 6px 12px rgba(0,0,0,.32);
+}
+input:checked + .box .box-title {
+	border-bottom: 1px solid rgba(0,0,0,.18);
+}
+input:checked + .box .box-content,
+input:checked + .box .box-close {
+	display: inline-block;
+}
+.arrows section .box-title {
+	padding-left: 44px;
+	width: calc(100% - 64px);
+}
+.arrows section .box-title:before {
+	position: absolute;
+	display: block;
+	content: '\203a';
+	font-size: 18pt;
+	left: 20px;
+	top: -2px;
+	transition: transform .15s ease-in-out;
+	color: rgba(0,0,0,.54);
+}
+input:checked + section.box .box-title:before {
+	transform: rotate(90deg);
+}
